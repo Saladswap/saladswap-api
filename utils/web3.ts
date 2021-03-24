@@ -1,5 +1,5 @@
 import Web3 from "web3";
-import { AbiItem } from 'web3-utils'
+import { AbiItem } from "web3-utils";
 
 // const BSC_NODE_RPC = [
 //   "https://bsc-dataseed.binance.org/",
