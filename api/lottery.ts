@@ -22,10 +22,11 @@ export const lottery = async (
   if (typeof issueIndex !== "number") {
     return issueIndex;
   }
-
+console.log('-- issueIndex : ', issueIndex);
   const finalNumbersProm: Array<SingleLotteryReturn> = [];
   const totalPage = pageSize ? Math.ceil(issueIndex / pageSize - 1) : 0;
-
+  console.log('-- pageSize : ', pageSize);
+  console.log('-- page : ', page);
   if (typeof pageSize !== "undefined") {
     if (pageSize * page > issueIndex) {
       return {
@@ -39,12 +40,16 @@ export const lottery = async (
     const offset = page * pageSize;
     const start = issueIndex - (offset + 1);
     const end = start - pageSize;
+    console.log('-- offset : ', offset);
+    console.log('-- start : ', start);
+    console.log('-- end : ', end);
 
     for (let i = start; i >= 0 && i > end; i--) {
       if (i !== 349) {
         finalNumbersProm.push(getSingleLotteryBatch(i));
       }
     }
+    console.log('-- finalNumbersProm : ', finalNumbersProm);
   } else {
     for (let i = issueIndex; i >= 0; i--) {
       if (i !== 349) {
@@ -53,7 +58,7 @@ export const lottery = async (
     }
   }
   const finalNumbers = await computeLotteries(finalNumbersProm);
-
+  console.log('-- finalNumbers : ', finalNumbers);
   return {
     totalPage: totalPage,
     totalItems: issueIndex,
